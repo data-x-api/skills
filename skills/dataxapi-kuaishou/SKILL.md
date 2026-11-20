@@ -5,7 +5,7 @@ description: "Public Kuaishou data through DataXAPI: videos, users, comments, tr
 
 # Kuaishou data with DataXAPI (快手数据)
 
-DataXAPI returns public Kuaishou data (快手的公开数据) in one response shape, paid per call from a prepaid balance. This skill lists all 8 Kuaishou endpoints with their prices and the questions each one answers. It was generated from catalog revision c48ce454ae6c4c65.
+DataXAPI returns public Kuaishou data (快手的公开数据) in one response shape, paid per call from a prepaid balance. This skill lists all 8 Kuaishou endpoints with their prices and the questions each one answers. It was generated from catalog revision 720fc3ea8dadb865.
 
 - Prices: $0.0020 to $0.0200 a call, each endpoint at its own price (listed below). A call that fails is never charged.
 - No Kuaishou account and no cookie: one DataXAPI key, read from `$DATAXAPI_API_KEY`. Never print it, log it or put it in an address.
@@ -32,7 +32,7 @@ curl -G "https://api.dataxapi.com/v1/kuaishou/trends/list" \
   -H "Authorization: Bearer $DATAXAPI_API_KEY"
 ```
 
-`kuaishou.trends.list` costs $0.002 per call, also when the result is empty. Every capability ID maps to its path: dots become slashes under `/v1`.
+`kuaishou.trends.list` costs $0.002 per call. Every capability ID maps to its path: dots become slashes under `/v1`.
 
 ## What to call for which question
 
@@ -46,14 +46,14 @@ When the question is not one of these, run `find` (or `dataxapi find`) with the 
 
 | Capability ID | Name | Returns | Price | A page |
 | --- | --- | --- | --- | --- |
-| `kuaishou.comments.replies.list` | Kuaishou comment replies (快手评论回复) | Get a page of the replies under a Kuaishou comment, by the comment's ID and its video's ID: text, replier, likes, time posted, IP location. | $0.002 per call, also when the result is empty | up to 20 |
-| `kuaishou.trends.list` | Kuaishou hot list (快手热榜) | Get Kuaishou's hot list: 50 trending terms and whatever the platform pins above them, with rank and heat. | $0.002 per call, also when the result is empty | up to 60 |
-| `kuaishou.users.get` | Kuaishou user profile (快手用户资料) | Get a Kuaishou user's profile by user ID: name, handle, bio, follower, following and post counts, total likes, verification. | $0.02 per call, nothing when it finds nothing | one object |
-| `kuaishou.users.search` | Kuaishou user search (快手用户搜索) | Search Kuaishou accounts by terms, a page at a time: user ID, display name, handle, bio, follower count, verification. | $0.02 per call, also when the result is empty | up to 20 |
-| `kuaishou.users.videos.list` | Kuaishou user videos (快手用户作品) | Get a page of the videos a Kuaishou account has posted, newest or most popular first: caption, play and engagement counts, time posted. | $0.02 per call, also when the result is empty | up to 20 |
-| `kuaishou.videos.comments.list` | Kuaishou video comments (快手作品评论) | Get a page of top-level comments on a Kuaishou video: text, commenter, likes, time posted, IP location. | $0.002 per call, also when the result is empty | up to 40 |
-| `kuaishou.videos.get` | Kuaishou video detail (快手作品详情) | Get one Kuaishou video by ID or link: caption, author, play and engagement counts, time posted. | $0.002 per call, nothing when it finds nothing | one object |
-| `kuaishou.videos.search` | Kuaishou video search (快手视频搜索) | Search Kuaishou videos by terms, a page at a time: caption, author, play and engagement counts, time posted. | $0.02 per call, also when the result is empty | up to 20 |
+| `kuaishou.comments.replies.list` | Kuaishou comment replies (快手评论回复) | Get a page of the replies under a Kuaishou comment, by the comment's ID and its video's ID: text, replier, likes, time posted, IP location. | $0.002 per call | up to 20 |
+| `kuaishou.trends.list` | Kuaishou hot list (快手热榜) | Get Kuaishou's hot list: 50 trending terms and whatever the platform pins above them, with rank and heat. | $0.002 per call | up to 60 |
+| `kuaishou.users.get` | Kuaishou user profile (快手用户资料) | Get a Kuaishou user's profile by user ID: name, handle, bio, follower, following and post counts, total likes, verification; in the full view also what the badge says, the IP location, gender, and whether the profile has a Kuaishou store. | $0.02 per call | one object |
+| `kuaishou.users.search` | Kuaishou user search (快手用户搜索) | Search Kuaishou accounts by terms, a page at a time, with only verified accounts or only those live now, by gender, or ordered by followers: user ID, display name, handle, bio, follower count, verification. | $0.02 per call | up to 20 |
+| `kuaishou.users.videos.list` | Kuaishou user videos (快手用户作品) | Get a page of the videos a Kuaishou account has posted, newest or most popular first: caption, play and engagement counts, time posted. | $0.02 per call | up to 20 |
+| `kuaishou.videos.comments.list` | Kuaishou video comments (快手作品评论) | Get a page of top-level comments on a Kuaishou video: text, commenter, likes, time posted, IP location. | $0.002 per call | up to 40 |
+| `kuaishou.videos.get` | Kuaishou video detail (快手作品详情) | Get one Kuaishou video by ID or link: caption, author, play and engagement counts, time posted. | $0.002 per call | one object |
+| `kuaishou.videos.search` | Kuaishou video search (快手视频搜索) | Search Kuaishou posts by terms, a page at a time, sorted newest or most liked first and filtered by time posted and video length: caption, author, play and engagement counts, time posted, whether it is a video or a photo set, and a video's length. | $0.02 per call | up to 20 |
 
 Each endpoint's whole contract (parameters, fields, a recorded response) is its page: https://dataxapi.com/apis/kuaishou/, one link per endpoint; the Markdown version is the page address plus `.md`.
 
@@ -61,7 +61,6 @@ Each endpoint's whole contract (parameters, fields, a recorded response) is its 
 
 - One call returns one page (10 to 51 items on a typical page here). `page.next_cursor` is passed back as `cursor` for the next page; each page is a new call, charged again. Page only when the task needs more.
 - Reading on in a result that was cut (`read_more`, `dataxapi more`) is free for 24 hours.
-- 6 of these 8 endpoints charge an empty result (the search was done); the others do not. Errors, timeouts and objects that do not exist are never charged.
 - Tell the user the price before calls that add up, and cap them: `max_price` (MCP), `--max-price` (command line), `X-Max-Price` (REST).
 - On `insufficient_balance` or `key_budget_exceeded` stop and tell the user. Never retry `not_found`.
 

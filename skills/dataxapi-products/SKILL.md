@@ -25,7 +25,7 @@ Platforms: tiktok, xiaohongshu (Xiaohongshu (RedNote)).
 dataxapi run products platform=tiktok 'query=yoga mat' products=3 --plan
 ```
 
-With these inputs the plan is 4 calls, at most $0.008, about $0.008 when every call returns a typical page (price book 2, catalog revision c48ce454ae6c4c65). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 11 calls or $0.17.
+With these inputs the plan is 4 calls, at most $0.008, about $0.008 when every call returns a typical page (price book 19, catalog revision 720fc3ea8dadb865). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 11 calls or $0.17.
 
 2. **Tell the user** what the plan says it can cost at most, then run it, capped at that amount, with the table written to a file:
 
@@ -40,7 +40,7 @@ dataxapi run products platform=tiktok 'query=yoga mat' products=3 --yes --max-sp
 - `products`: the platform's own capability of the role commerce.products.search (`tiktok.shop.products.search`, `xiaohongshu.shop.products.search`).
 - `reviews`: the platform's own capability of the role commerce.products.reviews.list (`tiktok.shop.products.reviews.list`, `xiaohongshu.shop.products.reviews.list`), once for each item of `products`; left out where the platform has none, and a failure of it does not stop the run.
 
-Every call is charged at the price `dataxapi show <capability>` prints, which also says what an empty answer is charged; a call that fails is not charged.
+Every call is charged at the price `dataxapi show <capability>` prints; a call that fails is not charged.
 
 ## When it stops
 

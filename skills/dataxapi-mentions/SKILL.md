@@ -24,7 +24,7 @@ Platforms: bilibili, douyin, kuaishou, linkedin, pinterest, reddit, threads, tik
 dataxapi run mentions platforms=douyin,weibo,bilibili 'query=露营' --plan
 ```
 
-With these inputs the plan is 3 calls, at most $0.024, about $0.024 when every call returns a typical page (price book 2, catalog revision c48ce454ae6c4c65). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 5 calls or $0.1.
+With these inputs the plan is 3 calls, at most $0.024, about $0.024 when every call returns a typical page (price book 19, catalog revision 720fc3ea8dadb865). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 5 calls or $0.1.
 
 2. **Tell the user** what the plan says it can cost at most, then run it, capped at that amount, with the table written to a file:
 
@@ -38,7 +38,7 @@ dataxapi run mentions platforms=douyin,weibo,bilibili 'query=露营' --yes --max
 
 - `posts`: the platform's own capability of the role social.posts.search (`bilibili.videos.search`, `douyin.videos.search`, `kuaishou.videos.search`, `linkedin.posts.search`, `pinterest.pins.search`, `reddit.posts.search`, `threads.posts.search`, `tiktok.videos.search`, `wechat.posts.search`, `wechat_channels.videos.search`, `weibo.posts.search`, `x.posts.search`, `xiaohongshu.notes.search`, `youtube.videos.search`, `zhihu.posts.search`), once for each of `platforms`.
 
-Every call is charged at the price `dataxapi show <capability>` prints, which also says what an empty answer is charged; a call that fails is not charged.
+Every call is charged at the price `dataxapi show <capability>` prints; a call that fails is not charged.
 
 ## When it stops
 

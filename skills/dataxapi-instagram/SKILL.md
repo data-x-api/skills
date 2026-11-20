@@ -5,7 +5,7 @@ description: "Public Instagram data through DataXAPI: posts, hashtags, users, co
 
 # Instagram data with DataXAPI (Instagram数据)
 
-DataXAPI returns public Instagram data (Instagram的公开数据) in one response shape, paid per call from a prepaid balance. This skill lists all 8 Instagram endpoints with their prices and the questions each one answers. It was generated from catalog revision c48ce454ae6c4c65.
+DataXAPI returns public Instagram data (Instagram的公开数据) in one response shape, paid per call from a prepaid balance. This skill lists all 8 Instagram endpoints with their prices and the questions each one answers. It was generated from catalog revision 720fc3ea8dadb865.
 
 - Prices: $0.0020 to $0.0040 a call, each endpoint at its own price (listed below). A call that fails is never charged.
 - No Instagram account and no cookie: one DataXAPI key, read from `$DATAXAPI_API_KEY`. Never print it, log it or put it in an address.
@@ -33,7 +33,7 @@ curl -G "https://api.dataxapi.com/v1/instagram/users/get" \
   -H "Authorization: Bearer $DATAXAPI_API_KEY"
 ```
 
-`instagram.users.get` costs $0.002 per call, nothing when it finds nothing. Every capability ID maps to its path: dots become slashes under `/v1`.
+`instagram.users.get` costs $0.002 per call. Every capability ID maps to its path: dots become slashes under `/v1`.
 
 ## What to call for which question
 
@@ -47,14 +47,14 @@ When the question is not one of these, run `find` (or `dataxapi find`) with the 
 
 | Capability ID | Name | Returns | Price | A page |
 | --- | --- | --- | --- | --- |
-| `instagram.comments.replies.list` | Instagram comment replies (Instagram 评论回复) | Get a page of the replies to an Instagram comment, by the comment's ID and its post's shortcode: text, replier, time posted. | $0.002 per call, also when the result is empty | up to 15 |
-| `instagram.hashtags.posts.list` | Instagram hashtag posts (Instagram 话题帖子) | Get a page of the newest Instagram posts under a hashtag, by its name, about 33 a page: caption, author's ID, like and comment counts, time posted, image. | $0.002 per call, also when the result is empty | up to 35 |
-| `instagram.posts.comments.list` | Instagram post comments (Instagram 帖子评论) | Get a page of comments on an Instagram post or reel by shortcode or link, about 15 a page, newest first: text, commenter, likes, time posted. | $0.002 per call, also when the result is empty | up to 15 |
-| `instagram.posts.get` | Instagram post detail (Instagram 帖子详情) | Get one Instagram post or reel by shortcode or link: caption, author, like, comment and play counts, image and video addresses. | $0.002 per call, nothing when it finds nothing | one object |
-| `instagram.posts.transcript.get` | Instagram video transcript (Instagram 视频字幕) | Get what is said in an Instagram reel or video post by shortcode or link, as one text; videos up to two minutes long. | $0.002 per call, nothing when it finds nothing | one object |
-| `instagram.users.get` | Instagram user profile (Instagram 用户资料) | Get an Instagram user's profile by handle: name, bio, follower and following counts, verification, whether it is private. | $0.002 per call, nothing when it finds nothing | one object |
-| `instagram.users.posts.list` | Instagram user posts (Instagram 用户帖子) | Get a page of what an Instagram user posted, by handle, 12 a page, or its reels only: caption, like, comment and play counts, time posted, image and video addresses. | $0.002 per call, also when the result is empty | up to 12 |
-| `instagram.users.search` | Instagram user search (Instagram 用户搜索) | Search Instagram accounts by keyword, about 50 in one answer and no further pages: handle, name, avatar, verification, whether it is private. | $0.004 per call, also when the result is empty | up to 50 |
+| `instagram.comments.replies.list` | Instagram comment replies (Instagram 评论回复) | Get a page of the replies to an Instagram comment, by the comment's ID and its post's shortcode: text, replier, time posted. | $0.002 per call | up to 15 |
+| `instagram.hashtags.posts.list` | Instagram hashtag posts (Instagram 话题帖子) | Get a page of the newest Instagram posts under a hashtag, by its name, about 33 a page: caption, author's ID, like and comment counts, time posted, image. | $0.002 per call | up to 35 |
+| `instagram.posts.comments.list` | Instagram post comments (Instagram 帖子评论) | Get a page of comments on an Instagram post or reel by shortcode or link, about 15 a page, newest first: text, commenter, likes, time posted. | $0.002 per call | up to 15 |
+| `instagram.posts.get` | Instagram post detail (Instagram 帖子详情) | Get one Instagram post or reel by shortcode or link: caption, author, like, comment and play counts, image and video addresses, and the other authors of a collab post. | $0.002 per call | one object |
+| `instagram.posts.transcript.get` | Instagram video transcript (Instagram 视频字幕) | Get what is said in an Instagram reel or video post by shortcode or link, as one text; videos up to two minutes long. | $0.002 per call | one object |
+| `instagram.users.get` | Instagram user profile (Instagram 用户资料) | Get an Instagram user's profile by handle: name, bio, follower and following counts, verification, whether it is private, and the website and links the profile gives. | $0.002 per call | one object |
+| `instagram.users.posts.list` | Instagram user posts (Instagram 用户帖子) | Get a page of what an Instagram user posted, by handle, 12 a page, or its reels only: caption, like, comment and play counts, time posted, image and video addresses, and the other authors of a collab post. | $0.002 per call | up to 12 |
+| `instagram.users.search` | Instagram user search (Instagram 用户搜索) | Search Instagram accounts by keyword, about 50 in one answer and no further pages: handle, name, avatar, verification, whether it is private. | $0.004 per call | up to 50 |
 
 Each endpoint's whole contract (parameters, fields, a recorded response) is its page: https://dataxapi.com/apis/instagram/, one link per endpoint; the Markdown version is the page address plus `.md`.
 
@@ -62,7 +62,6 @@ Each endpoint's whole contract (parameters, fields, a recorded response) is its 
 
 - One call returns one page (12 to 50 items on a typical page here). `page.next_cursor` is passed back as `cursor` for the next page; each page is a new call, charged again. Page only when the task needs more.
 - Reading on in a result that was cut (`read_more`, `dataxapi more`) is free for 24 hours.
-- 5 of these 8 endpoints charge an empty result (the search was done); the others do not. Errors, timeouts and objects that do not exist are never charged.
 - Tell the user the price before calls that add up, and cap them: `max_price` (MCP), `--max-price` (command line), `X-Max-Price` (REST).
 - On `insufficient_balance` or `key_budget_exceeded` stop and tell the user. Never retry `not_found`.
 

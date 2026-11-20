@@ -23,7 +23,7 @@ Platforms: bilibili, douyin, kuaishou, reddit, weibo, x (X (Twitter)), xiaohongs
 dataxapi run trends platforms=douyin,weibo,bilibili --plan
 ```
 
-With these inputs the plan is 3 calls, at most $0.006, about $0.006 when every call returns a typical page (price book 2, catalog revision c48ce454ae6c4c65). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 8 calls or $0.06.
+With these inputs the plan is 3 calls, at most $0.006, about $0.006 when every call returns a typical page (price book 19, catalog revision 720fc3ea8dadb865). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 8 calls or $0.06.
 
 2. **Tell the user** what the plan says it can cost at most, then run it, capped at that amount, with the table written to a file:
 
@@ -37,7 +37,7 @@ dataxapi run trends platforms=douyin,weibo,bilibili --yes --max-spend 0.006 --ou
 
 - `trends`: the platform's own capability of the role social.trends.list (`bilibili.trends.list`, `douyin.trends.list`, `kuaishou.trends.list`, `reddit.trends.list`, `weibo.trends.list`, `x.trends.list`, `xiaohongshu.trends.list`, `zhihu.trends.list`), once for each of `platforms`.
 
-Every call is charged at the price `dataxapi show <capability>` prints, which also says what an empty answer is charged; a call that fails is not charged.
+Every call is charged at the price `dataxapi show <capability>` prints; a call that fails is not charged.
 
 ## When it stops
 

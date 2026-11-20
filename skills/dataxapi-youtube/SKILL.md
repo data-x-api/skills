@@ -5,7 +5,7 @@ description: "Public YouTube data through DataXAPI: videos, posts, channels, com
 
 # YouTube data with DataXAPI (YouTube数据)
 
-DataXAPI returns public YouTube data (YouTube的公开数据) in one response shape, paid per call from a prepaid balance. This skill lists all 10 YouTube endpoints with their prices and the questions each one answers. It was generated from catalog revision c48ce454ae6c4c65.
+DataXAPI returns public YouTube data (YouTube的公开数据) in one response shape, paid per call from a prepaid balance. This skill lists all 10 YouTube endpoints with their prices and the questions each one answers. It was generated from catalog revision 720fc3ea8dadb865.
 
 - Prices: $0.0020 a call, each endpoint at its own price (listed below). A call that fails is never charged.
 - No YouTube account and no cookie: one DataXAPI key, read from `$DATAXAPI_API_KEY`. Never print it, log it or put it in an address.
@@ -33,7 +33,7 @@ curl -G "https://api.dataxapi.com/v1/youtube/videos/transcript/get" \
   -H "Authorization: Bearer $DATAXAPI_API_KEY"
 ```
 
-`youtube.videos.transcript.get` costs $0.002 per call, nothing when it finds nothing. Every capability ID maps to its path: dots become slashes under `/v1`.
+`youtube.videos.transcript.get` costs $0.002 per call. Every capability ID maps to its path: dots become slashes under `/v1`.
 
 ## What to call for which question
 
@@ -47,16 +47,16 @@ When the question is not one of these, run `find` (or `dataxapi find`) with the 
 
 | Capability ID | Name | Returns | Price | A page |
 | --- | --- | --- | --- | --- |
-| `youtube.channels.get` | YouTube channel profile (YouTube 频道资料) | Get a YouTube channel by ID or handle: name, description, subscriber count, video count, total views, verification, the day it was created. | $0.002 per call, nothing when it finds nothing | one object |
-| `youtube.channels.search` | YouTube channel search (YouTube 频道搜索) | Find YouTube channels by search terms: name, handle, description, subscriber count, verification. | $0.002 per call, also when the result is empty | up to 40 |
-| `youtube.channels.videos.list` | YouTube channel videos (YouTube 频道视频) | Get a page of a YouTube channel's videos or Shorts by channel ID or handle, newest or most viewed first: title, description, time published, views, likes, length. | $0.002 per call, also when the result is empty | up to 60 |
-| `youtube.comments.replies.list` | YouTube comment replies (YouTube 评论回复) | Get a page of the replies to a YouTube comment, by the replies token the comment list gives: text, replier, likes. | $0.002 per call, also when the result is empty | up to 50 |
-| `youtube.videos.comments.list` | YouTube video comments (YouTube 视频评论) | Get a page of comments on a YouTube video by ID or link, top or newest first: text, commenter, likes, reply count, and the token that gets a comment's replies. | $0.002 per call, also when the result is empty | up to 20 |
-| `youtube.videos.get` | YouTube video detail (YouTube 视频详情) | Get one YouTube video by ID or link: title, description, channel, time published, view, like and comment counts, length. | $0.002 per call, nothing when it finds nothing | one object |
-| `youtube.videos.search` | YouTube video search (YouTube 视频搜索) | Find YouTube videos by search terms, by relevance or by views, within a time window: title, channel, views, length. | $0.002 per call, also when the result is empty | up to 100 |
-| `youtube.videos.transcript.get` | YouTube video transcript (YouTube 视频字幕) | Get the transcript of a YouTube video by ID or link: the whole text and timed segments. | $0.002 per call, nothing when it finds nothing | one object |
-| `youtube.channels.posts.list` | YouTube channel posts (YouTube 频道帖子) | Get a page of the posts on a YouTube channel's Posts tab (once Community) by channel ID or handle, newest first: text, pictures, likes, the video a post carries. | $0.002 per call, also when the result is empty | up to 20 |
-| `youtube.posts.get` | YouTube post detail (YouTube 帖子详情) | Get one YouTube channel post (once a Community post) by ID or link: text, channel, pictures, likes, the video it carries. | $0.002 per call, nothing when it finds nothing | one object |
+| `youtube.channels.get` | YouTube channel profile (YouTube 频道资料) | Get a YouTube channel by ID or handle: name, description, subscriber count, video count, total views, verification, the day it was created, the links its About section lists (its website, its other social accounts) and its keywords. | $0.002 per call | one object |
+| `youtube.channels.search` | YouTube channel search (YouTube 频道搜索) | Find YouTube channels by search terms: name, handle, description, subscriber count, verification. | $0.002 per call | up to 40 |
+| `youtube.channels.videos.list` | YouTube channel videos (YouTube 频道视频) | Get a page of a YouTube channel's videos or Shorts by channel ID or handle, newest or most viewed first: title, description, time published, views, likes, length. | $0.002 per call | up to 60 |
+| `youtube.comments.replies.list` | YouTube comment replies (YouTube 评论回复) | Get a page of the replies to a YouTube comment, by the replies token the comment list gives: text, replier, likes. | $0.002 per call | up to 50 |
+| `youtube.videos.comments.list` | YouTube video comments (YouTube 视频评论) | Get a page of comments on a YouTube video by ID or link, top or newest first: text, commenter, likes, reply count, and the token that gets a comment's replies. | $0.002 per call | up to 20 |
+| `youtube.videos.get` | YouTube video detail (YouTube 视频详情) | Get one YouTube video by ID or link: title, description, channel, time published, view, like and comment counts, length, and the tags its author set, its category and chapters. | $0.002 per call | one object |
+| `youtube.videos.search` | YouTube video search (YouTube 视频搜索) | Find YouTube videos by search terms, by relevance or by views, within a time window: title, channel, views, length. | $0.002 per call | up to 100 |
+| `youtube.videos.transcript.get` | YouTube video transcript (YouTube 视频字幕) | Get the transcript of a YouTube video by ID or link: the whole text and timed segments. lang chooses the language of the captions. | $0.002 per call | one object |
+| `youtube.channels.posts.list` | YouTube channel posts (YouTube 频道帖子) | Get a page of the posts on a YouTube channel's Posts tab (once Community) by channel ID or handle, newest first: text, pictures, likes, the video a post carries. | $0.002 per call | up to 20 |
+| `youtube.posts.get` | YouTube post detail (YouTube 帖子详情) | Get one YouTube channel post (once a Community post) by ID or link: text, channel, pictures, likes, the video it carries. | $0.002 per call | one object |
 
 Each endpoint's whole contract (parameters, fields, a recorded response) is its page: https://dataxapi.com/apis/youtube/, one link per endpoint; the Markdown version is the page address plus `.md`.
 
@@ -64,7 +64,6 @@ Each endpoint's whole contract (parameters, fields, a recorded response) is its 
 
 - One call returns one page (10 to 30 items on a typical page here). `page.next_cursor` is passed back as `cursor` for the next page; each page is a new call, charged again. Page only when the task needs more.
 - Reading on in a result that was cut (`read_more`, `dataxapi more`) is free for 24 hours.
-- 6 of these 10 endpoints charge an empty result (the search was done); the others do not. Errors, timeouts and objects that do not exist are never charged.
 - Tell the user the price before calls that add up, and cap them: `max_price` (MCP), `--max-price` (command line), `X-Max-Price` (REST).
 - On `insufficient_balance` or `key_budget_exceeded` stop and tell the user. Never retry `not_found`.
 

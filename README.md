@@ -44,7 +44,7 @@ Task skills, each across the platforms that have the data:
 | `dataxapi-products` | Products and reviews (商品与评价) |
 
 Platform skills, one per platform, with every endpoint it has and what to watch for: `dataxapi-douyin` (抖音),
-`dataxapi-xiaohongshu` (小红书 / RedNote), `dataxapi-tiktok`, `dataxapi-wechat-mp` (微信公众号),
+`dataxapi-xiaohongshu` (小红书 / RedNote), `dataxapi-tiktok`, `dataxapi-wechat` (微信搜一搜), `dataxapi-wechat-mp` (微信公众号),
 `dataxapi-wechat-channels` (视频号), `dataxapi-kuaishou` (快手), `dataxapi-bilibili` (B站), `dataxapi-weibo` (微博),
 `dataxapi-zhihu` (知乎), `dataxapi-x`, `dataxapi-youtube`, `dataxapi-instagram`, `dataxapi-facebook`,
 `dataxapi-threads`, `dataxapi-reddit`, `dataxapi-linkedin`, `dataxapi-telegram`, `dataxapi-pinterest`,

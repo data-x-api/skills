@@ -5,7 +5,7 @@ description: "Public TikTok data through DataXAPI: videos, hashtags, users, comm
 
 # TikTok data with DataXAPI (TikTok数据)
 
-DataXAPI returns public TikTok data (TikTok的公开数据) in one response shape, paid per call from a prepaid balance. This skill lists all 18 TikTok endpoints with their prices and the questions each one answers. It was generated from catalog revision c48ce454ae6c4c65.
+DataXAPI returns public TikTok data (TikTok的公开数据) in one response shape, paid per call from a prepaid balance. This skill lists all 18 TikTok endpoints with their prices and the questions each one answers. It was generated from catalog revision 720fc3ea8dadb865.
 
 - Prices: $0.0020 a call, each endpoint at its own price (listed below). A call that fails is never charged.
 - No TikTok account and no cookie: one DataXAPI key, read from `$DATAXAPI_API_KEY`. Never print it, log it or put it in an address.
@@ -33,7 +33,7 @@ curl -G "https://api.dataxapi.com/v1/tiktok/videos/search" \
   -H "Authorization: Bearer $DATAXAPI_API_KEY"
 ```
 
-`tiktok.videos.search` costs $0.002 per call, also when the result is empty. Every capability ID maps to its path: dots become slashes under `/v1`.
+`tiktok.videos.search` costs $0.002 per call. Every capability ID maps to its path: dots become slashes under `/v1`.
 
 ## What to call for which question
 
@@ -48,24 +48,24 @@ When the question is not one of these, run `find` (or `dataxapi find`) with the 
 
 | Capability ID | Name | Returns | Price | A page |
 | --- | --- | --- | --- | --- |
-| `tiktok.ads.search` | TikTok Ads Library search (TikTok 广告库搜索) | Search TikTok's public Ads Library (ads shown in Europe) by keyword: advertiser, headline, videos and images, when each was first and last shown, and a bracket of people reached; newest first, 12 ads a page. This is the transparency record of ads, a different set from the Creative Center's Top Ads. | $0.002 per call, also when the result is empty | up to 12 |
-| `tiktok.ads.get` | TikTok Ads Library ad detail (TikTok 广告库广告详情) | Get one ad of TikTok's public Ads Library by its ID or link: advertiser, headline, videos and images, landing page, when it was first and last shown, the countries it was shown in and the campaign's objective. | $0.002 per call, nothing when it finds nothing | one object |
-| `tiktok.comments.replies.list` | TikTok comment replies (TikTok 评论回复) | Get a page of the replies to a TikTok comment, by the comment's ID and its video's ID, 20 a page: text, replier, likes, time posted, which reply it answers. | $0.002 per call, also when the result is empty | up to 20 |
-| `tiktok.creative_center.ads.get` | TikTok Creative Center Top Ad detail (TikTok 创意中心热门广告详情) | Get one Top Ad of TikTok's Creative Center by its ID: the ad's video, caption, brand name, landing page, likes, comments, shares, length, campaign objective and the countries it ran in. | $0.002 per call, nothing when it finds nothing | one object |
-| `tiktok.creative_center.ads.search` | TikTok Creative Center Top Ads search (TikTok 创意中心热门广告搜索) | Search the Top Ads of TikTok's Creative Center by keyword: the ad's video, caption, brand name, likes, length and campaign objective; one country at a time, over a chosen period, in the Creative Center's own order or by likes. 20 ads a page. This is a showcase of ads that did well, not an ad library: it has no dates. | $0.002 per call, also when the result is empty | up to 20 |
-| `tiktok.hashtags.videos.list` | TikTok hashtag videos (TikTok 话题作品) | Get a page of the TikTok videos under a hashtag, by its name, about 20 a page: caption, author, engagement counts, cover and play address. | $0.002 per call, also when the result is empty | up to 20 |
-| `tiktok.users.get` | TikTok user profile (TikTok 用户资料) | Get a TikTok user's profile by handle or ID: name, bio, follower, following and video counts, likes received, verification. | $0.002 per call, nothing when it finds nothing | one object |
-| `tiktok.users.search` | TikTok user search (TikTok 用户搜索) | Search TikTok accounts by keyword, 30 a page: handle, name, follower, following and video counts, likes received. | $0.002 per call, also when the result is empty | up to 30 |
-| `tiktok.users.videos.list` | TikTok user videos (TikTok 用户作品) | Get a page of the videos a TikTok user posted, by handle, 10 a page: caption, engagement counts, time posted, cover and play address; newest or most popular first. | $0.002 per call, also when the result is empty | up to 10 |
-| `tiktok.videos.comments.list` | TikTok video comments (TikTok 视频评论) | Get a page of comments on a TikTok video by ID or link, 50 a page: text, commenter, likes, reply count, time posted. | $0.002 per call, also when the result is empty | up to 50 |
-| `tiktok.videos.get` | TikTok video detail (TikTok 视频详情) | Get one TikTok video by ID or link: caption, author, like, comment, share, favorite and play counts, cover and play address. | $0.002 per call, nothing when it finds nothing | one object |
-| `tiktok.videos.search` | TikTok video search (TikTok 视频搜索) | Search TikTok videos by keyword, 30 a page; sort by relevance, likes or time posted, and limit how recently they were posted. | $0.002 per call, also when the result is empty | up to 30 |
-| `tiktok.videos.transcript.get` | TikTok video transcript (TikTok 视频字幕) | Get what is said in a TikTok video by ID or link: the whole text and timed segments. | $0.002 per call, nothing when it finds nothing | one object |
-| `tiktok.shop.products.get` | TikTok Shop product detail (TikTok Shop 商品详情) | Get a TikTok Shop product in the United States by its ID: title, description, pictures, rating, reviews, units sold, shop; its price comes from the product search. | $0.002 per call, nothing when it finds nothing | one object |
-| `tiktok.shop.products.reviews.list` | TikTok Shop product reviews (TikTok Shop 商品评价) | Get the first 10 buyers' reviews of a TikTok Shop product in the United States by the product's ID: text, rating, time, variant bought, pictures. | $0.002 per call, also when the result is empty | up to 10 |
-| `tiktok.shop.products.search` | TikTok Shop product search (TikTok Shop 商品搜索) | Search the products of TikTok Shop in the United States by terms: title, current and original price, rating, units sold, shop. | $0.002 per call, also when the result is empty | up to 60 |
-| `tiktok.shop.sellers.products.list` | TikTok Shop seller products (TikTok Shop 店铺商品) | Get a page of the products a TikTok Shop seller in the United States has on sale by the seller's ID: title, current and original price, rating, reviews, units sold. | $0.002 per call, also when the result is empty | up to 20 |
-| `tiktok.users.followers.list` | TikTok user followers (TikTok 用户粉丝列表) | Get a page of the accounts following a TikTok user, by handle, 50 a page, newest followers first: handle, name, bio, follower, following and video counts, likes received. | $0.002 per call, also when the result is empty | up to 50 |
+| `tiktok.ads.search` | TikTok Ads Library search (TikTok 广告库搜索) | Search TikTok's public Ads Library (ads shown in Europe) by keyword or by the advertiser's name: advertiser, headline, videos and images, when each was first and last shown, and a bracket of people reached; newest first, 12 ads a page. This is the transparency record of ads, a different set from the Creative Center's Top Ads. | $0.002 per call | up to 12 |
+| `tiktok.ads.get` | TikTok Ads Library ad detail (TikTok 广告库广告详情) | Get one ad of TikTok's public Ads Library by its ID or link: advertiser, headline, videos and images, landing page, when it was first and last shown, the countries it was shown in and the campaign's objective. | $0.002 per call | one object |
+| `tiktok.comments.replies.list` | TikTok comment replies (TikTok 评论回复) | Get a page of the replies to a TikTok comment, by the comment's ID and its video's ID, 20 a page: text, replier, likes, time posted, which reply it answers. | $0.002 per call | up to 20 |
+| `tiktok.creative_center.ads.get` | TikTok Creative Center Top Ad detail (TikTok 创意中心热门广告详情) | Get one Top Ad of TikTok's Creative Center by its ID: the ad's video, caption, brand name, landing page, likes, comments, shares, length, campaign objective, industry code and the countries it ran in. | $0.002 per call | one object |
+| `tiktok.creative_center.ads.search` | TikTok Creative Center Top Ads search (TikTok 创意中心热门广告搜索) | Search the Top Ads of TikTok's Creative Center by keyword: the ad's video, caption, brand name, likes, length and campaign objective; one country at a time, over a chosen period, in the Creative Center's own order or by likes. 20 ads a page. This is a showcase of ads that did well, not an ad library: it has no dates. | $0.002 per call | up to 20 |
+| `tiktok.hashtags.videos.list` | TikTok hashtag videos (TikTok 话题作品) | Get a page of the TikTok videos under a hashtag, by its name, about 20 a page: caption, author, engagement counts, cover and play address. | $0.002 per call | up to 20 |
+| `tiktok.users.get` | TikTok user profile (TikTok 用户资料) | Get a TikTok user's profile by handle or ID: name, bio, follower, following and video counts, likes received, verification. | $0.002 per call | one object |
+| `tiktok.users.search` | TikTok user search (TikTok 用户搜索) | Search TikTok accounts by keyword, 30 a page: handle, name, follower, following and video counts, likes received. | $0.002 per call | up to 30 |
+| `tiktok.users.videos.list` | TikTok user videos (TikTok 用户作品) | Get a page of the videos a TikTok user posted, by handle, 10 a page: caption, engagement counts, time posted, cover and play address; newest or most popular first. | $0.002 per call | up to 10 |
+| `tiktok.videos.comments.list` | TikTok video comments (TikTok 视频评论) | Get a page of comments on a TikTok video by ID or link, 50 a page: text, commenter, likes, reply count, time posted. Each comment also says the commenter account's country or region. | $0.002 per call | up to 50 |
+| `tiktok.videos.get` | TikTok video detail (TikTok 视频详情) | Get one TikTok video by ID or link: caption, author, like, comment, share, favorite and play counts, cover and play address. | $0.002 per call | one object |
+| `tiktok.videos.search` | TikTok video search (TikTok 视频搜索) | Search TikTok videos by keyword, 30 a page; sort by relevance, likes or time posted, and limit how recently they were posted. | $0.002 per call | up to 30 |
+| `tiktok.videos.transcript.get` | TikTok video transcript (TikTok 视频字幕) | Get what is said in a TikTok video by ID or link: the whole text and timed segments. lang chooses the language of the captions. | $0.002 per call | one object |
+| `tiktok.shop.products.get` | TikTok Shop product detail (TikTok Shop 商品详情) | Get a TikTok Shop product in the United States by its ID: title, description, pictures, rating, reviews, units sold, the shop with its rating, followers and products on sale, and the price and shipping fee its page shows. The page's price runs about a shipping fee above the price in the shop's list and the search, which the product search gives. | $0.002 per call | one object |
+| `tiktok.shop.products.reviews.list` | TikTok Shop product reviews (TikTok Shop 商品评价) | Get the first 10 buyers' reviews of a TikTok Shop product in the United States by the product's ID: text, rating, time, variant bought, pictures. | $0.002 per call | up to 10 |
+| `tiktok.shop.products.search` | TikTok Shop product search (TikTok Shop 商品搜索) | Search the products of TikTok Shop in the United States by terms: title, current and original price, rating, units sold, shop. | $0.002 per call | up to 60 |
+| `tiktok.shop.sellers.products.list` | TikTok Shop seller products (TikTok Shop 店铺商品) | Get a page of the products a TikTok Shop seller in the United States has on sale by the seller's ID: title, current and original price, rating, reviews, units sold. | $0.002 per call | up to 20 |
+| `tiktok.users.followers.list` | TikTok user followers (TikTok 用户粉丝列表) | Get a page of the accounts following a TikTok user, by handle, 50 a page, newest followers first: handle, name, bio, follower, following and video counts, likes received, and each account's country or region and language, for where the followers are. | $0.002 per call | up to 50 |
 
 Each endpoint's whole contract (parameters, fields, a recorded response) is its page: https://dataxapi.com/apis/tiktok/, one link per endpoint; the Markdown version is the page address plus `.md`.
 
@@ -73,7 +73,6 @@ Each endpoint's whole contract (parameters, fields, a recorded response) is its 
 
 - One call returns one page (10 to 50 items on a typical page here). `page.next_cursor` is passed back as `cursor` for the next page; each page is a new call, charged again. Page only when the task needs more.
 - Reading on in a result that was cut (`read_more`, `dataxapi more`) is free for 24 hours.
-- 12 of these 18 endpoints charge an empty result (the search was done); the others do not. Errors, timeouts and objects that do not exist are never charged.
 - Tell the user the price before calls that add up, and cap them: `max_price` (MCP), `--max-price` (command line), `X-Max-Price` (REST).
 - On `insufficient_balance` or `key_budget_exceeded` stop and tell the user. Never retry `not_found`.
 

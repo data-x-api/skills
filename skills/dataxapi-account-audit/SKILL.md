@@ -24,7 +24,7 @@ Platforms: bilibili, douyin, facebook, instagram, kuaishou, linkedin, reddit, te
 dataxapi run account-audit platform=tiktok account=nasa --plan
 ```
 
-With these inputs the plan is 2 calls, at most $0.004, about $0.004 when every call returns a typical page (price book 2, catalog revision c48ce454ae6c4c65). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 2 calls or $0.06.
+With these inputs the plan is 2 calls, at most $0.004, about $0.004 when every call returns a typical page (price book 19, catalog revision 720fc3ea8dadb865). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 2 calls or $0.06.
 
 2. **Tell the user** what the plan says it can cost at most, then run it, capped at that amount, with the table written to a file:
 
@@ -39,7 +39,7 @@ dataxapi run account-audit platform=tiktok account=nasa --yes --max-spend 0.004 
 - `account`: the platform's own capability of the role social.accounts.get (`bilibili.users.get`, `douyin.users.get`, `facebook.pages.get`, `instagram.users.get`, `kuaishou.users.get`, `linkedin.companies.get`, `reddit.users.get`, `telegram.channels.get`, `threads.users.get`, `tiktok.users.get`, `wechat_channels.users.get`, `wechat_mp.accounts.get`, `weibo.users.get`, `x.users.get`, `xiaohongshu.users.get`, `youtube.channels.get`, `zhihu.users.get`).
 - `posts`: the platform's own capability of the role social.accounts.posts.list (`bilibili.users.videos.list`, `douyin.users.videos.list`, `facebook.pages.posts.list`, `instagram.users.posts.list`, `kuaishou.users.videos.list`, `linkedin.companies.posts.list`, `reddit.users.posts.list`, `telegram.channels.messages.list`, `threads.users.posts.list`, `tiktok.users.videos.list`, `wechat_channels.users.videos.list`, `wechat_mp.accounts.articles.list`, `weibo.users.posts.list`, `x.users.posts.list`, `xiaohongshu.users.notes.list`, `youtube.channels.videos.list`, `zhihu.users.answers.list`).
 
-Every call is charged at the price `dataxapi show <capability>` prints, which also says what an empty answer is charged; a call that fails is not charged.
+Every call is charged at the price `dataxapi show <capability>` prints; a call that fails is not charged.
 
 ## When it stops
 

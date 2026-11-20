@@ -5,7 +5,7 @@ description: "Public Threads data through DataXAPI: posts, users. 4 endpoints, $
 
 # Threads data with DataXAPI (Threads数据)
 
-DataXAPI returns public Threads data (Threads的公开数据) in one response shape, paid per call from a prepaid balance. This skill lists all 4 Threads endpoints with their prices and the questions each one answers. It was generated from catalog revision c48ce454ae6c4c65.
+DataXAPI returns public Threads data (Threads的公开数据) in one response shape, paid per call from a prepaid balance. This skill lists all 4 Threads endpoints with their prices and the questions each one answers. It was generated from catalog revision 720fc3ea8dadb865.
 
 - Prices: $0.0020 a call, each endpoint at its own price (listed below). A call that fails is never charged.
 - No Threads account and no cookie: one DataXAPI key, read from `$DATAXAPI_API_KEY`. Never print it, log it or put it in an address.
@@ -33,7 +33,7 @@ curl -G "https://api.dataxapi.com/v1/threads/posts/search" \
   -H "Authorization: Bearer $DATAXAPI_API_KEY"
 ```
 
-`threads.posts.search` costs $0.002 per call, also when the result is empty. Every capability ID maps to its path: dots become slashes under `/v1`.
+`threads.posts.search` costs $0.002 per call. Every capability ID maps to its path: dots become slashes under `/v1`.
 
 ## What to call for which question
 
@@ -47,10 +47,10 @@ When the question is not one of these, run `find` (or `dataxapi find`) with the 
 
 | Capability ID | Name | Returns | Price | A page |
 | --- | --- | --- | --- | --- |
-| `threads.posts.get` | Threads post detail (Threads 帖子详情) | Get one Threads post by its code or link: text, author, time, likes, replies, reposts, images. | $0.002 per call, nothing when it finds nothing | one object |
-| `threads.posts.search` | Threads post search (Threads 帖子搜索) | Find Threads posts by search terms: text, author, time, likes, replies, reposts; can be limited by publication date. One page of results. | $0.002 per call, also when the result is empty | up to 20 |
-| `threads.users.get` | Threads user profile (Threads 用户资料) | Get a Threads user's profile by handle: name, bio, follower count, verification, avatar. | $0.002 per call, nothing when it finds nothing | one object |
-| `threads.users.posts.list` | Threads user posts (Threads 用户帖子) | Get a Threads user's latest posts by handle: text, time, likes, replies, reposts, images. The most recent page only; there is no older page. | $0.002 per call, also when the result is empty | up to 30 |
+| `threads.posts.get` | Threads post detail (Threads 帖子详情) | Get one Threads post by its code or link: text, author, time, likes, replies, reposts, images. | $0.002 per call | one object |
+| `threads.posts.search` | Threads post search (Threads 帖子搜索) | Find Threads posts by search terms: text, author, time, likes, replies, reposts; can be limited by publication date. One page of results. | $0.002 per call | up to 20 |
+| `threads.users.get` | Threads user profile (Threads 用户资料) | Get a Threads user's profile by handle: name, bio, follower count, verification, avatar. | $0.002 per call | one object |
+| `threads.users.posts.list` | Threads user posts (Threads 用户帖子) | Get a Threads user's latest posts by handle: text, time, likes, replies, reposts, images. The most recent page only; there is no older page. | $0.002 per call | up to 30 |
 
 Each endpoint's whole contract (parameters, fields, a recorded response) is its page: https://dataxapi.com/apis/threads/, one link per endpoint; the Markdown version is the page address plus `.md`.
 
@@ -58,7 +58,6 @@ Each endpoint's whole contract (parameters, fields, a recorded response) is its 
 
 - One call returns one page (15 to 20 items on a typical page here). `page.next_cursor` is passed back as `cursor` for the next page; each page is a new call, charged again. Page only when the task needs more.
 - Reading on in a result that was cut (`read_more`, `dataxapi more`) is free for 24 hours.
-- 2 of these 4 endpoints charge an empty result (the search was done); the others do not. Errors, timeouts and objects that do not exist are never charged.
 - Tell the user the price before calls that add up, and cap them: `max_price` (MCP), `--max-price` (command line), `X-Max-Price` (REST).
 - On `insufficient_balance` or `key_budget_exceeded` stop and tell the user. Never retry `not_found`.
 

@@ -25,7 +25,7 @@ Platforms: bilibili, douyin, facebook, instagram, kuaishou, reddit, tiktok, wech
 dataxapi run comments platform=douyin id=7694940173372575014 pages=3 --plan
 ```
 
-With these inputs the plan is 3 calls, at most $0.006, about $0.006 when every call returns a typical page (price book 2, catalog revision c48ce454ae6c4c65). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 10 calls or $0.05.
+With these inputs the plan is 3 calls, at most $0.006, about $0.006 when every call returns a typical page (price book 19, catalog revision 720fc3ea8dadb865). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 10 calls or $0.05.
 
 2. **Tell the user** what the plan says it can cost at most, then run it, capped at that amount, with the table written to a file:
 
@@ -39,7 +39,7 @@ dataxapi run comments platform=douyin id=7694940173372575014 pages=3 --yes --max
 
 - `comments`: the platform's own capability of the role social.posts.comments.list (`bilibili.videos.comments.list`, `douyin.videos.comments.list`, `facebook.posts.comments.list`, `instagram.posts.comments.list`, `kuaishou.videos.comments.list`, `reddit.posts.comments.list`, `tiktok.videos.comments.list`, `wechat_channels.videos.comments.list`, `weibo.posts.comments.list`, `x.posts.replies.list`, `xiaohongshu.notes.comments.list`, `youtube.videos.comments.list`, `zhihu.answers.comments.list`), page after page up to the limit.
 
-Every call is charged at the price `dataxapi show <capability>` prints, which also says what an empty answer is charged; a call that fails is not charged.
+Every call is charged at the price `dataxapi show <capability>` prints; a call that fails is not charged.
 
 ## When it stops
 

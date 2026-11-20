@@ -7,7 +7,7 @@ description: "Get public data from social and content platforms (Douyin, Kuaisho
 
 DataXAPI returns public data from social and content platforms, one page per call, paid per call or per item returned. This skill drives it with the `dataxapi` command line. If `dataxapi` is not found, install it with `npm install -g dataxapi` (Node 20 or later), or put `npx dataxapi` in place of `dataxapi`. Finding and looking are free and need no key; calling is charged and needs `DATAXAPI_API_KEY` in the environment (never print or echo the key).
 
-Capability IDs read `platform.resource.action`, for example `douyin.comments.replies.list`. Platforms: douyin (抖音), kuaishou (快手), xiaohongshu (小红书), x (X（推特）), youtube, wechat (微信搜一搜), wechat_mp (微信公众号), wechat_channels (微信视频号), telegram, facebook, linkedin, threads, reddit, zhihu (知乎), tiktok, instagram, bilibili (B站), weibo (微博), pinterest, meta (Meta 广告库), google (Google 广告). This skill was generated from catalog revision c48ce454ae6c4c65: 207 capabilities.
+Capability IDs read `platform.resource.action`, for example `douyin.comments.replies.list`. Platforms: douyin (抖音), kuaishou (快手), xiaohongshu (小红书), x (X（推特）), youtube, wechat (微信搜一搜), wechat_mp (微信公众号), wechat_channels (微信视频号), telegram, facebook, linkedin, threads, reddit, zhihu (知乎), tiktok, instagram, bilibili (B站), weibo (微博), pinterest, meta (Meta 广告库), google (Google 广告). This skill was generated from catalog revision 720fc3ea8dadb865: 237 capabilities.
 
 ## The three steps
 
@@ -23,7 +23,7 @@ dataxapi find "Douyin comment replies"
 dataxapi show douyin.comments.replies.list
 ```
 
-3. **Call** it. Parameters are `name=value`; a list is comma-separated. Cap the call with `--max-price`: a call that could cost more is refused before anything runs. `douyin.comments.replies.list` costs $0.002 per call, also when the result is empty; the most one call can cost is $0.002.
+3. **Call** it. Parameters are `name=value`; a list is comma-separated. Cap the call with `--max-price`: a call that could cost more is refused before anything runs. `douyin.comments.replies.list` costs $0.002 per call; the most one call can cost is $0.002.
 
 ```bash
 dataxapi call douyin.comments.replies.list id=7655660369926603557 post_id=7655283400210664719 --max-price 0.002 --source skill.dataxapi
@@ -49,12 +49,12 @@ dataxapi balance
 
 ## Money and errors
 
-- Errors and objects that do not exist are not charged. Every answer states what was charged.
+- Errors are not charged. Every answer states what was charged.
 - Exit codes say what to do next:
   - `0`: Done.
   - `1`: The command line itself failed. Nothing is known about a charge beyond what was printed.
   - `2`: Refused before anything ran: nothing was charged. Wrong usage, no key, a parameter, the price cap, the balance or a limit. Change the request; do not send it again as it is.
-  - `3`: It ran and failed: nothing was charged. The message says whether trying again can help; never retry not_found.
+  - `3`: It ran and failed: nothing was charged, but for an object not there or input refused that its source billed (the message says what was charged). The message says whether trying again can help; never retry not_found.
   - `4`: NOT KNOWN whether it was charged: it may have run. Before anything else look it up (`more <id>`) or send the same call again under the same --idempotency-key, which cannot charge twice. For a run: `run ... --resume <run-id>` asks about that call first.
   - `5`: A run stopped before its end: at its budget, expired, or at a step that failed. The bill says what was charged until then; `run ... --resume <run-id>` goes on without charging it again.
 - Never retry `not_found`. On `insufficient_balance` or `key_budget_exceeded` stop and tell the user.

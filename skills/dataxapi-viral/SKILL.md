@@ -24,7 +24,7 @@ Platforms: bilibili, douyin, facebook, instagram, kuaishou, linkedin, pinterest,
 dataxapi run viral platform=tiktok id=7665840565958872333 --plan
 ```
 
-With these inputs the plan is 2 calls, at most $0.004, about $0.004 when every call returns a typical page (price book 2, catalog revision c48ce454ae6c4c65). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 2 calls or $0.04.
+With these inputs the plan is 2 calls, at most $0.004, about $0.004 when every call returns a typical page (price book 19, catalog revision 720fc3ea8dadb865). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 2 calls or $0.04.
 
 2. **Tell the user** what the plan says it can cost at most, then run it, capped at that amount, with the table written to a file:
 
@@ -39,7 +39,7 @@ dataxapi run viral platform=tiktok id=7665840565958872333 --yes --max-spend 0.00
 - `post`: the platform's own capability of the role social.posts.get (`bilibili.videos.get`, `douyin.videos.get`, `facebook.posts.get`, `instagram.posts.get`, `kuaishou.videos.get`, `linkedin.posts.get`, `pinterest.pins.get`, `reddit.posts.get`, `telegram.messages.get`, `threads.posts.get`, `tiktok.videos.get`, `wechat_channels.videos.get`, `wechat_mp.articles.get`, `weibo.posts.get`, `x.posts.get`, `xiaohongshu.notes.get`, `youtube.videos.get`, `zhihu.answers.get`).
 - `transcript`: the platform's own capability of the role social.transcripts.get (`instagram.posts.transcript.get`, `linkedin.posts.transcript.get`, `reddit.posts.transcript.get`, `tiktok.videos.transcript.get`, `x.posts.transcript.get`, `youtube.videos.transcript.get`); left out where the platform has none, and a failure of it does not stop the run.
 
-Every call is charged at the price `dataxapi show <capability>` prints, which also says what an empty answer is charged; a call that fails is not charged.
+Every call is charged at the price `dataxapi show <capability>` prints; a call that fails is not charged.
 
 ## When it stops
 

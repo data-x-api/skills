@@ -24,7 +24,7 @@ Platforms: bilibili, douyin, facebook, instagram, kuaishou, linkedin, reddit, te
 dataxapi run competitors platform=tiktok accounts=nasa,natgeo --plan
 ```
 
-With these inputs the plan is 2 calls, at most $0.004, about $0.004 when every call returns a typical page (price book 2, catalog revision c48ce454ae6c4c65). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 10 calls or $0.3.
+With these inputs the plan is 2 calls, at most $0.004, about $0.004 when every call returns a typical page (price book 19, catalog revision 720fc3ea8dadb865). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 10 calls or $0.3.
 
 2. **Tell the user** what the plan says it can cost at most, then run it, capped at that amount, with the table written to a file:
 
@@ -38,7 +38,7 @@ dataxapi run competitors platform=tiktok accounts=nasa,natgeo --yes --max-spend 
 
 - `posts`: the platform's own capability of the role social.accounts.posts.list (`bilibili.users.videos.list`, `douyin.users.videos.list`, `facebook.pages.posts.list`, `instagram.users.posts.list`, `kuaishou.users.videos.list`, `linkedin.companies.posts.list`, `reddit.users.posts.list`, `telegram.channels.messages.list`, `threads.users.posts.list`, `tiktok.users.videos.list`, `wechat_channels.users.videos.list`, `wechat_mp.accounts.articles.list`, `weibo.users.posts.list`, `x.users.posts.list`, `xiaohongshu.users.notes.list`, `youtube.channels.videos.list`, `zhihu.users.answers.list`), once for each of `accounts`.
 
-Every call is charged at the price `dataxapi show <capability>` prints, which also says what an empty answer is charged; a call that fails is not charged.
+Every call is charged at the price `dataxapi show <capability>` prints; a call that fails is not charged.
 
 ## When it stops
 

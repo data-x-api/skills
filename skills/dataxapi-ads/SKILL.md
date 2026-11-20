@@ -25,7 +25,7 @@ Platforms: linkedin, meta (Meta Ad Library), tiktok.
 dataxapi run ads platforms=meta,tiktok 'query=running shoes' pages=1 --plan
 ```
 
-With these inputs the plan is 2 calls, at most $0.004, about $0.004 when every call returns a typical page (price book 2, catalog revision c48ce454ae6c4c65). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 9 calls or $0.05.
+With these inputs the plan is 2 calls, at most $0.004, about $0.004 when every call returns a typical page (price book 19, catalog revision 720fc3ea8dadb865). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 9 calls or $0.05.
 
 2. **Tell the user** what the plan says it can cost at most, then run it, capped at that amount, with the table written to a file:
 
@@ -39,7 +39,7 @@ dataxapi run ads platforms=meta,tiktok 'query=running shoes' pages=1 --yes --max
 
 - `ads`: the platform's own capability of the role ads.ads.search (`linkedin.ads.search`, `meta.ads.search`, `tiktok.ads.search`), once for each of `platforms`, page after page up to the limit.
 
-Every call is charged at the price `dataxapi show <capability>` prints, which also says what an empty answer is charged; a call that fails is not charged.
+Every call is charged at the price `dataxapi show <capability>` prints; a call that fails is not charged.
 
 ## When it stops
 

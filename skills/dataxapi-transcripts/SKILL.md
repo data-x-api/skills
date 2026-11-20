@@ -24,7 +24,7 @@ Platforms: instagram, linkedin, meta (Meta Ad Library), reddit, tiktok, x (X (Tw
 dataxapi run transcripts platform=tiktok links=https://www.tiktok.com/@nasa/video/7665840565958872333 --plan
 ```
 
-With these inputs the plan is 1 call, at most $0.002, about $0.002 when every call returns a typical page (price book 2, catalog revision c48ce454ae6c4c65). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 10 calls or $0.05.
+With these inputs the plan is 1 call, at most $0.002, about $0.002 when every call returns a typical page (price book 19, catalog revision 720fc3ea8dadb865). Other inputs and other platforms come to other amounts: the plan says. No run of this task is opened above 10 calls or $0.05.
 
 2. **Tell the user** what the plan says it can cost at most, then run it, capped at that amount, with the table written to a file:
 
@@ -38,7 +38,7 @@ dataxapi run transcripts platform=tiktok links=https://www.tiktok.com/@nasa/vide
 
 - `transcripts`: the platform's own capability of the role social.transcripts.get (`instagram.posts.transcript.get`, `linkedin.posts.transcript.get`, `meta.ads.transcript.get`, `reddit.posts.transcript.get`, `tiktok.videos.transcript.get`, `x.posts.transcript.get`, `youtube.videos.transcript.get`), once for each of `links`; left out where the platform has none, and a failure of it does not stop the run.
 
-Every call is charged at the price `dataxapi show <capability>` prints, which also says what an empty answer is charged; a call that fails is not charged.
+Every call is charged at the price `dataxapi show <capability>` prints; a call that fails is not charged.
 
 ## When it stops
 

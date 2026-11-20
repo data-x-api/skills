@@ -5,7 +5,7 @@ description: "Public Facebook data through DataXAPI: posts, pages. 4 endpoints, 
 
 # Facebook data with DataXAPI (Facebook数据)
 
-DataXAPI returns public Facebook data (Facebook的公开数据) in one response shape, paid per call from a prepaid balance. This skill lists all 4 Facebook endpoints with their prices and the questions each one answers. It was generated from catalog revision c48ce454ae6c4c65.
+DataXAPI returns public Facebook data (Facebook的公开数据) in one response shape, paid per call from a prepaid balance. This skill lists all 4 Facebook endpoints with their prices and the questions each one answers. It was generated from catalog revision 720fc3ea8dadb865.
 
 - Prices: $0.0020 a call, each endpoint at its own price (listed below). A call that fails is never charged.
 - No Facebook account and no cookie: one DataXAPI key, read from `$DATAXAPI_API_KEY`. Never print it, log it or put it in an address.
@@ -33,7 +33,7 @@ curl -G "https://api.dataxapi.com/v1/facebook/pages/posts/list" \
   -H "Authorization: Bearer $DATAXAPI_API_KEY"
 ```
 
-`facebook.pages.posts.list` costs $0.002 per call, also when the result is empty. Every capability ID maps to its path: dots become slashes under `/v1`.
+`facebook.pages.posts.list` costs $0.002 per call. Every capability ID maps to its path: dots become slashes under `/v1`.
 
 ## What to call for which question
 
@@ -47,10 +47,10 @@ When the question is not one of these, run `find` (or `dataxapi find`) with the 
 
 | Capability ID | Name | Returns | Price | A page |
 | --- | --- | --- | --- | --- |
-| `facebook.pages.get` | Facebook page profile (Facebook 主页资料) | Get a public Facebook page by handle, ID or link: name, intro, follower count, likes, category, website, creation date. | $0.002 per call, nothing when it finds nothing | one object |
-| `facebook.pages.posts.list` | Facebook page posts (Facebook 主页帖子) | Get a page of the posts a Facebook page published, by page ID, handle or link: text, time, reaction count, comment count, images; shares and views come from the post capability. Three posts a page, with older pages behind a cursor. | $0.002 per call, also when the result is empty | up to 3 |
-| `facebook.posts.comments.list` | Facebook post comments (Facebook 帖子评论) | Get a page of the comments on a Facebook post or reel by the post's ID: text, commenter, reactions, reply count, time posted. | $0.002 per call, also when the result is empty | up to 10 |
-| `facebook.posts.get` | Facebook post detail (Facebook 帖子详情) | Get one Facebook post or reel by its link: text, author, time, reaction count, comment count, shares, views, images. | $0.002 per call, nothing when it finds nothing | one object |
+| `facebook.pages.get` | Facebook page profile (Facebook 主页资料) | Get a public Facebook page by handle, ID or link: name, intro, follower count, likes, category, website, creation date. It also gives the page's ID in Meta's ad library, what getting its ads takes. | $0.002 per call | one object |
+| `facebook.pages.posts.list` | Facebook page posts (Facebook 主页帖子) | Get a page of the posts a Facebook page published, by page ID, handle or link: text, time, reaction count, comment count, images; shares and views come from the post capability. Three posts a page, with older pages behind a cursor. | $0.002 per call | up to 3 |
+| `facebook.posts.comments.list` | Facebook post comments (Facebook 帖子评论) | Get a page of the comments on a Facebook post or reel by the post's ID: text, commenter, reactions, reply count, time posted. | $0.002 per call | up to 10 |
+| `facebook.posts.get` | Facebook post detail (Facebook 帖子详情) | Get one Facebook post or reel by its link: text, author, time, reaction count, comment count, shares, views, images. | $0.002 per call | one object |
 
 Each endpoint's whole contract (parameters, fields, a recorded response) is its page: https://dataxapi.com/apis/facebook/, one link per endpoint; the Markdown version is the page address plus `.md`.
 
@@ -58,7 +58,6 @@ Each endpoint's whole contract (parameters, fields, a recorded response) is its 
 
 - One call returns one page (3 to 10 items on a typical page here). `page.next_cursor` is passed back as `cursor` for the next page; each page is a new call, charged again. Page only when the task needs more.
 - Reading on in a result that was cut (`read_more`, `dataxapi more`) is free for 24 hours.
-- 2 of these 4 endpoints charge an empty result (the search was done); the others do not. Errors, timeouts and objects that do not exist are never charged.
 - Tell the user the price before calls that add up, and cap them: `max_price` (MCP), `--max-price` (command line), `X-Max-Price` (REST).
 - On `insufficient_balance` or `key_budget_exceeded` stop and tell the user. Never retry `not_found`.
 
