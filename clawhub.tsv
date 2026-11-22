@@ -4,6 +4,7 @@ bilibili-video-search	dataxapi-bilibili-video-search	B站视频搜索 · Bilibil
 brand-mentions	dataxapi-brand-mentions	品牌与关键词舆情 · Brand and keyword mentions · DataXAPI
 comment-analysis	dataxapi-comment-analysis	评论分析 · Comment analysis · DataXAPI
 competitor-monitoring	dataxapi-competitor-monitoring	竞品账号监测 · Competitor monitoring · DataXAPI
+creator-video-transcripts	dataxapi-creator-video-transcripts	博主视频转文字 · A creator's videos to text · DataXAPI
 dataxapi-bilibili	dataxapi-bilibili	B站数据 API · Bilibili data API · DataXAPI
 dataxapi-douyin	dataxapi-douyin	抖音数据 API · Douyin data API · DataXAPI
 dataxapi-facebook	dataxapi-facebook	Facebook数据 API · Facebook data API · DataXAPI
